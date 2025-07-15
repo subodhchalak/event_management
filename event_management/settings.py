@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
     # third party apps
     'rest_framework',                # DRF
-
+    'drf_yasg',                      # Swagger
     # user created apps
     'event.apps.EventConfig'        # event app
 ]
