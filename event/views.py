@@ -91,7 +91,7 @@ class EventModelViewSet(viewsets.ModelViewSet):
                         "next": self.paginator.get_next_link(),
                         "previous": self.paginator.get_previous_link()
                     },
-                    "data": serializer.data
+                    "data": event_data
                 },
                 status=status.HTTP_200_OK
             )
