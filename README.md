@@ -73,6 +73,111 @@ Once the server is running, you can:
 *   Navigate the main site to view the list of upcoming events.
 *   Register as a new user to sign up for events.
 
+## API Documentation
+
+This project uses Swagger and ReDoc for API documentation. Once the development server is running, you can access the interactive API documentation at:
+
+*   **Swagger UI:** [http://127.0.0.1:8000/swagger/](http://127.0.0.1:8000/swagger/)
+*   **ReDoc:** [http://127.0.0.1:8000/redoc/](http://127.0.0.1:8000/redoc/)
+
+The documentation provides detailed information about all available endpoints, including request parameters, and response schemas.
+
+## API Request Examples
+
+Here are a few examples of how to interact with the API. Both `curl` and raw HTTP formats are provided.
+
+### 1. List All Upcoming Events
+
+This endpoint retrieves a paginated list of all events scheduled for the future. The `X-Timezone` header is optional and formats the datetime fields in the response.
+
+<details>
+<summary><strong>cURL</strong></summary>
+
+```sh
+curl -X GET http://127.0.0.1:8000/events/ \
+  -H "Content-Type: application/json" \
+  -H "X-Timezone: Asia/Kolkata"
+```
+</details>
+
+<details>
+<summary><strong>HTTP Request</strong></summary>
+
+```http
+GET /events/ HTTP/1.1
+Host: 127.0.0.1:8000
+Content-Type: application/json
+X-Timezone: Asia/Kolkata
+```
+</details>
+
+### 2. Create a New Event
+
+<details>
+<summary><strong>cURL</strong></summary>
+
+```sh
+curl -X POST http://127.0.0.1:8000/events/ \
+  -H "Content-Type: application/json" \
+  -H "X-Timezone: Asia/Kolkata" \
+  -d '{
+    "name": "New Tech Conference",
+    "location": "San Francisco",
+    "start_time": "2025-10-15 09:00:00",
+    "end_time": "2025-10-17 17:00:00",
+    "max_capacity": 200
+}'
+```
+</details>
+
+<details>
+<summary><strong>HTTP Request</strong></summary>
+
+```http
+POST /events/ HTTP/1.1
+Host: 127.0.0.1:8000
+Content-Type: application/json
+X-Timezone: Asia/Kolkata
+
+{
+    "name": "New Tech Conference",
+    "location": "San Francisco",
+    "start_time": "2025-10-15 09:00:00",
+    "end_time": "2025-10-17 17:00:00",
+    "max_capacity": 200
+}
+```
+</details>
+
+### 3. Register an Attendee for an Event
+
+Replace `{event_id}` with the ID of an existing event.
+
+<details>
+<summary><strong>cURL</strong></summary>
+
+```sh
+curl -X POST http://127.0.0.1:8000/events/{event_id}/register/ \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Jane Doe", "email": "jane.doe@example.com"}'
+```
+</details>
+
+<details>
+<summary><strong>HTTP Request</strong></summary>
+
+```http
+POST /events/{event_id}/register/ HTTP/1.1
+Host: 127.0.0.1:8000
+Content-Type: application/json
+
+{
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com"
+}
+```
+</details>
+
 ## Contributing
 
 Contributions are welcome! Please see the `CONTRIBUTING.md` file for details on how to contribute to this project. If one doesn't exist, you can explain the process here, for example:
